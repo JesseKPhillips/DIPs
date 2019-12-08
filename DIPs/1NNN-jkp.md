@@ -70,13 +70,9 @@ Required.
 Todo 
 
 ## Breaking Changes and Deprecations
-This section is not required if no breaking changes or deprecations are anticipated.
 
-Provide a detailed analysis on how the proposed changes may affect existing
-user code and a step-by-step explanation of the deprecation process which is
-supposed to handle breakage in a non-intrusive manner. Changes that may break
-user code and have no well-defined deprecation process have a minimal chance of
-being approved.
+This has no breaking change. It would be preferable for existing libraries to
+update with the standard but even this could be done without breaking. 
 
 ## Reference
 
