@@ -57,12 +57,28 @@ the default.
 The attribute library should make recommendations on use to guide more consistency. 
 
 ## Prior Work
-Required.
 
-If the proposed feature exists, or has been proposed, in other languages, this is the place
-to provide the details of those implementations and proposals. Ditto for prior DIPs.
+Within D:
+* Steven Dconf 2019: https://youtu.be/Y-cgh-rwoC8
+  * jsoniopipe: https://jsoniopipe.dpldocs.info/iopipe.json.serialize.html#members
+* Ethan Dconf 2019: https://youtu.be/rSY78Hu8DqI
+* vibe.d: https://vibed.org/api/vibe.data.serialization/
+* darg (similar): https://darg.dpldocs.info/darg.Option.html
+* painlessjson: https://code.dlang.org/packages/painlessjson
+* Mir asdf: https://code.dlang.org/packages/asdf
+* jsonize: https://code.dlang.org/packages/jsonizer
 
-If there is no prior work to be found, it must be explicitly noted here.
+
+Other Languages:
+
+* Java 
+  * Jackson: https://dzone.com/articles/jackson-annotations-for-json-part-2-serialization
+* C#
+  * Newtonsoft: https://www.newtonsoft.com/json
+  * System.text.json: https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-how-to#customize-json-names-and-values
+  * xml: https://docs.microsoft.com/en-us/dotnet/standard/serialization/attributes-that-control-xml-serialization
+  * SOAP: https://docs.microsoft.com/en-us/dotnet/standard/serialization/attributes-that-control-encoded-soap-serialization
+
 
 ## Description
 Required.
