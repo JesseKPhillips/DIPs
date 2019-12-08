@@ -10,10 +10,15 @@
 
 ## Abstract
 
-Required.
+Introduce into Phobos a new model (std.serialize.attribute) which will provide
+standard attributes that can describe serialization behavior of struct and class. 
 
-Short and concise description of the idea in a few lines.
-
+```dlang 
+struct Foo {
+  @name("class")
+  int _class;
+}
+```
 
 ## Contents
 * [Rationale](#rationale)
@@ -25,11 +30,16 @@ Short and concise description of the idea in a few lines.
 * [Reviews](#reviews)
 
 ## Rationale
-Required.
 
-A short motivation about the importance and benefits of the proposed change.  An existing,
-well-known issue or a use case for an existing projects can greatly increase the
-chances of the DIP being understood and carefully evaluated.
+Serialization provides a translation of the application memory into a machine independent disk
+storage or wire communication. Exact representation for this translation could be strings or
+binary data (xml, json, protocol buffer, etc). 
+
+On top of these implementation is the desire to write and retrieve the data directly from/to a 
+class or a struct.
+
+This proposal is to bring forth a defined standard/shared set of attributes to address common
+serialization challenges.
 
 ## Prior Work
 Required.
