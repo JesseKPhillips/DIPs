@@ -79,6 +79,67 @@ Other Languages:
   * xml: https://docs.microsoft.com/en-us/dotnet/standard/serialization/attributes-that-control-xml-serialization
   * SOAP: https://docs.microsoft.com/en-us/dotnet/standard/serialization/attributes-that-control-encoded-soap-serialization
 
+### Analysis 
+
+These are the different ways the existing libraries provide control. 
+I will explain and provide thoughts on each. 
+
+The examples listed are destination encoding specific, usually json. 
+Consideration should be made for the challenges which conflict or complicate
+providing a general available attribute. 
+
+#### Name Property
+https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-how-to#customize-individual-property-names
+
+This is the most basic need, it changes what name is used in the serialization. 
+
+In some approaches the property in and property out. 
+http://docs.asdf.dlang.io/asdf_serialization.html#.serializationKeysIn
+
+I do not generally see this type of flexibility, but conceptually it may be valuable
+in managing serialization versioning. 
+
+#### Ignore
+https://vibed.org/api/vibe.data.serialization/ignore
+
+This will skip the field for serialization. This may not be unnecessary with other
+attributes which define a means of delegating translation to a function. 
+
+While this could create multiple ways to achieve the same thing I believe it will
+be good to provide the attribute for libraries to use this for their chosen design.
+
+#### Name Policy
+https://docs.microsoft.com/en-us/dotnet/api/system.text.json.jsonnamingpolicy?view=netcore-3.0
+
+Languages have conventions for casing fields. Serialization is generally case sensitive. 
+This attribute provides a way to generally specify a conversion (pascal, camel, underscore). 
+
+I don't see this type of attribute, it relies on consistency which means if a conversion goes
+wrong it can be harder to track down.
+
+I believe writing the struct field to match the data exchange format to be preferable. 
+
+It may be of value to ignore case. 
+
+#### Array Like
+http://docs.asdf.dlang.io/asdf_serialization.html#.serializationLikeArray
+
+asdf tackles some specifics for D. Ranges translate well to arrays, however
+this requires an output range. D allows for inspecting and determining the
+range type. The serializer would need to determine what to do if it could only 
+go one direction, I do not believe this proposal needs to specify the behavior. 
+
+#### Enum String or Value
+https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-how-to#enums-as-strings
+
+Enumeration has a value or name. It will be good to include this. 
+
+#### To Json 
+
+This provides a direct override to have the type handle serialization. 
+This is probably the normal way serialization would work. 
+
+Since this is destination specific I do not see a need for this. 
 
 ## Description
 Required.
