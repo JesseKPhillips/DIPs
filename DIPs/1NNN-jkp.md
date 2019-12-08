@@ -10,10 +10,15 @@
 
 ## Abstract
 
-Required.
+Introduce into Phobos a new model (std.serialize.attribute) which will provide
+standard attributes that can describe serialization behavior of struct and class. 
 
-Short and concise description of the idea in a few lines.
-
+```dlang 
+struct Foo {
+  @name("class")
+  int _class;
+}
+```
 
 ## Contents
 * [Rationale](#rationale)
@@ -25,11 +30,31 @@ Short and concise description of the idea in a few lines.
 * [Reviews](#reviews)
 
 ## Rationale
-Required.
 
-A short motivation about the importance and benefits of the proposed change.  An existing,
-well-known issue or a use case for an existing projects can greatly increase the
-chances of the DIP being understood and carefully evaluated.
+Serialization provides a translation of the application memory into a machine independent disk
+storage or wire communication. Exact representation for this translation could be strings or
+binary data (xml, json, protocol buffer, etc). 
+
+On top of these implementation is the desire to write and retrieve the data directly from/to a 
+class or a struct.
+
+This proposal is to bring forth a defined standard/shared set of attributes to address common
+serialization challenges. It does not address preventing incompatibility across serialization 
+libraries. It will provide the ability for libraries to be designed to be compatible with
+other libraries without the libraries needing to include the other.
+
+We want libraries to make liberal use of the attributes, to achieve this the standard attributes
+should avoid complicating the effort to utilize the attributes. 
+
+I will utilize @optional and @required as an example. The question is which does an implementation
+default to? Does an implementation need to provide a means to specify the default.
+
+By having this library specify the expected default the ability of the library to make the best 
+choices for its situation is either prohibited or causes the library to implement a more complex 
+logic to escape from the default, along with every implementation which does not want to modify 
+the default. 
+
+The attribute library should make recommendations on use to guide more consistency. 
 
 ## Prior Work
 Required.
@@ -42,10 +67,7 @@ If there is no prior work to be found, it must be explicitly noted here.
 ## Description
 Required.
 
-Detailed technical description of the new semantics. Language grammar changes
-(per https://dlang.org/spec/grammar.html) needed to support the new syntax
-(or change) must be mentioned. Examples demonstrating the new semantics will
-strengthen the proposal and should be considered mandatory.
+Todo 
 
 ## Breaking Changes and Deprecations
 This section is not required if no breaking changes or deprecations are anticipated.
@@ -57,8 +79,6 @@ user code and have no well-defined deprecation process have a minimal chance of
 being approved.
 
 ## Reference
-Optional links to reference material such as existing discussions, research papers
-or any other supplementary materials.
 
 ## Copyright & License
 Copyright (c) 2019 by the D Language Foundation
