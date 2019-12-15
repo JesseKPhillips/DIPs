@@ -8,8 +8,6 @@ struct Default{}
 
 struct Ignore(T) {}
 
-struct Hook(T) {}
-
 struct SerializeFunc(alias Func) { alias Call = Func; }
 
 // https://youtu.be/rSY78Hu8DqI?t=2450
@@ -24,7 +22,6 @@ struct Example {
     @Ignore!DB
     int a;
     @Ignore!WEB
-    //@OnDBSerialize!(x => x + 2)
     @OnSerialize!(DB, SerializeFunc!(x => x + 4))
     int b;
     @OnSerialize!(WEB, SerializeFunc!(x => x + 4))
