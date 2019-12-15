@@ -164,9 +164,90 @@ This is probably the normal way serialization would work.
 Since this is destination specific I do not see a need for this. 
 
 ## Description
-Required.
 
-Todo 
+The library will provide two main components. 
+
+1. Target specific attribute properties
+2. Attribute retrieval methods to assist library writers
+
+### Attributes 
+
+Target identifiers. These are arbitrary attributes serialization can 
+be associated with. These items are provided for end-users to specify 
+common targets, but any symbol could be used to identify the target. 
+
+* Default 
+* Web
+* Database 
+* Wire
+* Disk
+
+Default is the only one with special meaning. It defines a behavior 
+when a specific target behavior is not defined. Again these are 
+arbitrary and only for end-user communication. 
+
+#### ignore
+
+Do not serialize or deserialize this field. 
+
+#### optional 
+
+Do no throw an exception or produce any form of failure if the data
+or field is missing. 
+
+#### required
+
+Throw an exception when data is missing from this field during serialization.
+
+It is recommended that during deserialization no exception or failure is produced. 
+Providing an indication of missing required fields would be appropriate. 
+
+https://softwareengineering.stackexchange.com/questions/12401/be-liberal-in-what-you-accept-or-not
+
+#### name
+
+This specifies the name of the field as it is encoded in the target.
+
+#### onSerialize
+
+Defines a function to utilize when serializing. 
+Should have the opposite operation onDeserialize. 
+
+#### onDeserialize
+
+Defines a function to utilize when deserialization completed. 
+Should have the opposite operation onSerialize. 
+
+This attribute can be added the type, allowing for modifying ignored
+fields. 
+
+#### useEnumName
+
+This could be added to the type or field and causes the enum to be
+converted to the name rather than the value. 
+
+### Retrieval
+
+An implementation is not required to support targeted specific selection. 
+However these meta functions should make it trivial to support. 
+
+#### Serial Fields 
+
+A function which returns the fields to serialize with the given target. 
+
+D provides property methods, since these methods do not have hidden fields 
+(as seen in C#) they are ignored. Users will be expected to us onDe/Serialize 
+to forward as needed. 
+
+Private fields will not be ignored by default. 
+
+#### Serial Tuple Name Value
+
+Here the type and field would be provided and a tuple with the type, name and value 
+Would be returned from the given target. 
+
+This function would not check if the field is to be ignored for the target. 
+ 
 
 ## Breaking Changes and Deprecations
 
