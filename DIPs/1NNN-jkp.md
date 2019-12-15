@@ -15,8 +15,12 @@ standard attributes that can describe serialization behavior of struct and class
 
 ```dlang 
 struct Foo {
-  @name("class")
+  @name!Default("class")
   int _class;
+  @required!DB 
+  int id;
+  @OnSerialize!(Web, SerializeFunc!(x => x.encode)) 
+  string text;
 }
 ```
 
@@ -33,18 +37,26 @@ struct Foo {
 
 Serialization provides a translation of the application memory into a machine independent disk
 storage or wire communication. Exact representation for this translation could be strings or
-binary data (xml, json, protocol buffer, etc). 
+binary data (xml, json, protocol buffer, etc). On top of these implementation is the desire to 
+write and retrieve the data directly from/to a class or a struct. 
 
-On top of these implementation is the desire to write and retrieve the data directly from/to a 
-class or a struct.
+By providing a standard set of attributes, and easy means to retrieve them, we make it easier to
+Switch serialization libraries, reduce attributes for serializing in different domains.
 
-This proposal is to bring forth a defined standard/shared set of attributes to address common
-serialization challenges. It does not address preventing incompatibility across serialization 
-libraries. It will provide the ability for libraries to be designed to be compatible with
-other libraries without the libraries needing to include the other.
+Protocol Buffer utilizes code generation off a specification. I believe generative libraries will
+become more common and it would be nice to have it generate serialization attributes other
+libraries also use.
 
-We want libraries to make liberal use of the attributes, to achieve this the standard attributes
-should avoid complicating the effort to utilize the attributes. 
+### Considerations 
+
+The standard attributes should avoid complicating the effort to utilize the attributes. 
+This way users of serialization libraries can expect some portions of the attributes to exist. 
+
+This means the does not mean every usage is guaranteed to remain conflict free.
+
+The attribute library should make recommendations on use to guide more consistency. 
+
+#### Defaults 
 
 I will utilize @optional and @required as an example. The question is which does an implementation
 default to? Does an implementation need to provide a means to specify the default.
@@ -54,7 +66,17 @@ choices for its situation is either prohibited or causes the library to implemen
 logic to escape from the default, along with every implementation which does not want to modify 
 the default. 
 
-The attribute library should make recommendations on use to guide more consistency. 
+#### Versions
+
+Versioning an API is a challenging undertaking. I have not seen existing implementations which
+tackle this challenge. 
+
+Based on the way protocol buffer handle version support the serialization library will need/want
+to provide their own attributes. 
+
+Protocol Buffer assigns a field number which is expected to be immutable field can be depreciated 
+however new fields should not reuse that number. It also recommends all members be optional (noting
+this is a wire protocol). 
 
 ## Prior Work
 
