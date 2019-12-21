@@ -215,6 +215,8 @@ This specifies the name of the field as it is encoded in the target.
 Defines a function to utilize when serializing. 
 Should have the opposite operation onDeserialize. 
 
+It should be possible to forward to a method on the type. 
+
 #### onDeserialize
 
 Defines a function to utilize when deserialization completed. 
@@ -257,6 +259,8 @@ This has no breaking change. It would be preferable for existing libraries to
 update with the standard but even this could be done without breaking. 
 
 ## Reference
+
+All references can be found in [Prior Work](#prior-work). 
 
 ## Copyright & License
 Copyright (c) 2019 by the D Language Foundation
