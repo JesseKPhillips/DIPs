@@ -54,7 +54,7 @@ would be less need to switch.
 The standard attributes should avoid complicating the effort to utilize the attributes. 
 This way users of serialization libraries can expect some portions of the attributes to exist. 
 
-This means the does not mean every usage is guaranteed to remain conflict free.
+This does not mean every usage is guaranteed to remain conflict free.
 
 The attribute library should make recommendations on use to guide more consistency. 
 
