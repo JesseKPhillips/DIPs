@@ -40,12 +40,14 @@ storage or wire communication. Exact representation for this translation could b
 binary data (xml, json, protocol buffer, etc). On top of these implementation is the desire to 
 write and retrieve the data directly from/to a class or a struct. 
 
-By providing a standard set of attributes, and easy means to retrieve them, we make it easier to
-Switch serialization libraries, reduce attributes for serializing in different domains.
+Generative code is common in D. Providing a set of standards for serialization allows libraries 
+which generate a class or struct to annotate some serialization attributes. Protocol Buffer is
+an example where struct or classes are generated off a DSL, the primary attribute needed in this
+case in @name to handle reserved keywords. 
 
-Protocol Buffer utilizes code generation off a specification. I believe generative libraries will
-become more common and it would be nice to have it generate serialization attributes other
-libraries also use.
+A smaller benefit which may provide unseen benefits is being able to switch serialization libraries 
+while maintaining the same or mostly same attributes. Possibly by having a defined standard there 
+would be less need to switch. 
 
 ### Considerations 
 
