@@ -174,7 +174,9 @@ The library will provide two main components.
 
 ### Attributes 
 
-Target identifiers. These are arbitrary attributes serialization can 
+#### Target identifiers
+
+These are arbitrary attributes serialization can 
 be associated with. These items are provided for end-users to specify 
 common targets, but any symbol could be used to identify the target. 
 
@@ -187,6 +189,15 @@ common targets, but any symbol could be used to identify the target.
 Default is the only one with special meaning. It defines a behavior 
 when a specific target behavior is not defined. Again these are 
 arbitrary and only for end-user communication. 
+
+The serialization library would specify an attribute which would
+take a target identifier as an argument and utilize that argument 
+for matching. 
+
+```dlang 
+@SerializerDB!Database
+struct Example {} 
+```
 
 #### ignore
 
