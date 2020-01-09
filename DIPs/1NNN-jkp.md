@@ -243,10 +243,14 @@ converted to the name rather than the value.
 
 ### Retrieval
 
-An implementation is not required to support targeted specific selection. 
-However these meta functions should make it trivial to support. 
+A serialization library would utilize these functions to obtain data and info
+to serialize.
 
-#### Serial Fields 
+#### Serialize Target
+
+Provides the requested target identifier of an attribute.
+
+#### Serialize Fields 
 
 A function which returns the fields to serialize with the given target. 
 
@@ -256,13 +260,14 @@ to forward as needed.
 
 Private fields will not be ignored by default. 
 
-#### Serial Tuple Name Value
+#### Serialize Tuple Name Value
 
 Here the type and field would be provided and a tuple with the type, name and value 
 Would be returned from the given target. 
 
 This function would not check if the field is to be ignored for the target. 
- 
+
+Processing of `onSerialize` functions would occur. 
 
 ## Breaking Changes and Deprecations
 
