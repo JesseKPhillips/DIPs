@@ -203,10 +203,23 @@ struct Example {}
 
 Do not serialize or deserialize this field. 
 
+```dlang 
+struct Example {
+    @Ignore
+    int a;
+} 
+
 #### optional 
 
 Do no throw an exception or produce any form of failure if the data
 or field is missing. 
+
+```dlang 
+struct Example {
+    @optional
+    int b;
+}
+```
 
 #### required
 
@@ -217,9 +230,25 @@ Providing an indication of missing required fields would be appropriate.
 
 https://softwareengineering.stackexchange.com/questions/12401/be-liberal-in-what-you-accept-or-not
 
+```dlang 
+struct Example {
+    @required 
+    int b;
+}
+```
+
 #### name
 
 This specifies the name of the field as it is encoded in the target.
+
+```dlang 
+struct Example { 
+   @name("class")
+   int _class;
+   @name("City, State") 
+   string cityState;
+}
+```
 
 #### onSerialize
 
@@ -227,6 +256,13 @@ Defines a function to utilize when serializing.
 Should have the opposite operation onDeserialize. 
 
 It should be possible to forward to a method on the type. 
+
+```dlang 
+struct Example {
+    @OnSerialize!(Default, SerializeFunc!(x => x + 4))
+    int c;
+}
+```
 
 #### onDeserialize
 
@@ -236,10 +272,27 @@ Should have the opposite operation onSerialize.
 This attribute can be added the type, allowing for modifying ignored
 fields. 
 
+```dlang 
+struct Example {
+    @OnDeserialize!(Default, SerializeFunc!(x => x - 4))
+    int c;
+}
+```
+
 #### useEnumName
 
 This could be added to the type or field and causes the enum to be
 converted to the name rather than the value. 
+
+```dlang 
+Enum { truck, van } 
+
+@useEnumName
+struct Example {
+    @useEnumName // or here 
+    Vehicle car;
+}
+```
 
 ### Retrieval
 
