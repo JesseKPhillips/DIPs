@@ -17,7 +17,7 @@ standard attributes that can describe serialization behavior of struct and class
 struct Foo {
   @name!Default("class")
   int _class;
-  @required!DB 
+  @required!Database 
   int id;
   @OnSerialize!(Web, SerializeFunc!(x => x.encode)) 
   string text;
