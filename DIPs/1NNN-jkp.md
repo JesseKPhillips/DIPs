@@ -294,6 +294,9 @@ struct Example {
     Vehicle car;
 }
 ```
+It is recommended that libraries provide a runtime option which
+would apply to the entire class and overrule this attribute. 
+
 
 ### Retrieval
 
