@@ -329,7 +329,9 @@ Processing of `onSerialize` functions would occur.
 ## Implementation
 
 The approval of this DIP would still require the standard attribute implementation 
-to be accompanied by an implementation of serialization utilizing the attributes. 
+to be accompanied by an example implementation of serialization utilizing the attributes. 
+
+This allows for confirmation that this specification is realistic. 
 
 ## Breaking Changes and Deprecations
 
