@@ -56,11 +56,14 @@ template partialDesire(alias attribute, alias toCheck) {
     alias attArgs = TemplateArgsOf!attribute;
     alias checkArgs = TemplateArgsOf!toCheck;
     static foreach(index, att; attArgs) {
+        static if (!is(typeof(partialDesire) == bool)) // if not yet defined
         static if(!partialDesire2!(att, index, toCheck)) {
             enum partialDesire = false;
         }
     }
-    enum partialDesire = true;
+
+    static if (!is(typeof(partialDesire) == bool)) // if not yet defined
+        enum partialDesire = true;
 }
 
 template MygetUDAs(alias symbol, alias attribute)
