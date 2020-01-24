@@ -6,7 +6,7 @@ struct DB{}
 struct WEB{}
 struct Default{}
 
-struct Ignore(T) {}
+struct Ignore(T = Default) {}
 
 struct SerializeFunc(alias Func) { alias Call = Func; }
 
@@ -25,6 +25,7 @@ struct Example {
     @OnSerialize!(DB, SerializeFunc!(x => x + 4))
     int b;
     @OnSerialize!(WEB, SerializeFunc!(x => x + 4))
+    @Ignore
     int c;
 }
 
