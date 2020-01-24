@@ -8,33 +8,27 @@ private template isDesiredUDA(alias attribute)
         static if (is(typeof(attribute)) && !__traits(isTemplate, attribute))
         {
             static if (__traits(compiles, toCheck == attribute)) {
-                pragma(msg, 1);
                 enum isDesiredUDA = toCheck == attribute;
             }
             else {
-                pragma(msg, 2);
                 enum isDesiredUDA = false;
             }
         }
         else static if (is(typeof(toCheck)))
         {
             static if (__traits(isTemplate, attribute)) {
-                pragma(msg, 3);
                 enum isDesiredUDA =  isDesiredUDA!(attribute, typeof(toCheck));
             }
             else {
-                pragma(msg, 4);
                 enum isDesiredUDA = is(typeof(toCheck) == attribute);
             }
         }
         else static if (__traits(isTemplate, attribute)) {
-                pragma(msg, 5);
             enum isDesiredUDA = isInstanceOf!(attribute, toCheck);
         }
         else
         {
             static if (isInstanceOf!(TemplateOf!attribute, toCheck)) {
-                pragma(msg, 6);
                 enum isDesiredUDA = partialDesire!(attribute, toCheck);
             }
                 else

@@ -38,8 +38,6 @@ void printAttributeProperties() {
     writeln("---------");
 
     static foreach(field; FieldNameTuple!(Example)) {
-        pragma(msg, "MygetUDAs!(Example." ~ field ~ ", OnSerialize!(" ~ firstTemplateArg!group ~ ", SerializeFunc).stringof");
-        //writeln(mixin("getUDAs!(Example." ~ field ~ ", OnSerialize"~"!(DB, SerializeFunc)"~").stringof"));
         writeln(mixin("MygetUDAs!(Example." ~ field ~ ", OnSerialize"~"!(" ~ firstTemplateArg!group ~ ", SerializeFunc)"~").stringof"));
     }
 }
