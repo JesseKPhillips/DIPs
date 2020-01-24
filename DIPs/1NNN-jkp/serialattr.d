@@ -2,9 +2,11 @@ import std;
 import extraMeta;
 
 //----- Standard Traits -----
-struct DB{}
-struct WEB{}
-struct Default{}
+struct Default {}
+struct Web {}
+struct Database {}
+struct Wire {}
+struct Disk {}
 
 struct Ignore(T = Default) {}
 
@@ -17,14 +19,14 @@ struct OnSerialize(T, alias f) {}
 struct SerializerDB(T) {}
 
 //----- Usage Example -----
-@SerializerDB!DB
+@SerializerDB!Database
 struct Example {
-    @Ignore!DB
+    @Ignore!Database
     int a;
-    @Ignore!WEB
-    @OnSerialize!(DB, SerializeFunc!(x => x + 4))
+    @Ignore!Web
+    @OnSerialize!(Database, SerializeFunc!(x => x + 4))
     int b;
-    @OnSerialize!(WEB, SerializeFunc!(x => x + 4))
+    @OnSerialize!(Web, SerializeFunc!(x => x + 4))
     @Ignore
     int c;
 }
