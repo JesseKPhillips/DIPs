@@ -190,13 +190,14 @@ Default is the only one with special meaning. It defines a behavior
 when a specific target behavior is not defined. Again these are 
 arbitrary and only for end-user communication. 
 
-The serialization library would specify an attribute which would
-take a target identifier as an argument and utilize that argument 
-for matching. 
+The serialization library would provide a means to pass the target
+identifier during serialization.
 
 ```dlang 
-@SerializerDB!Database
 struct Example {} 
+
+Example data;
+auto str = data.serialize!Database;
 ```
 
 #### ignore
